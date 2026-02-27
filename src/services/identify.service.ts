@@ -46,7 +46,7 @@ export const IdentifyService = async (
 
         return buildResponse([newContact]);
         }
-    // 3️⃣ Collect all possible primary IDs
+    // Collect all possible primary IDs
     const primaryIds = new Set<number>();
 
     for (const contact of matchedContacts) {
@@ -57,7 +57,7 @@ export const IdentifyService = async (
       }
     }
 
-    // 4️⃣ Fetch all those primaries ordered by oldest
+    //Fetch all those primaries ordered by oldest
     const primaries = await tx.contact.findMany({
     where: {
         id: { in: Array.from(primaryIds) },
@@ -73,7 +73,7 @@ export const IdentifyService = async (
     throw new Error("Invariant violation: No primary contact found");
     }
 
-    // 5️⃣ Merge other primaries into oldest
+    //Merge other primaries into oldest
     for (const primary of primaries.slice(1)) {
       if (primary.linkPrecedence === "primary") {
         await tx.contact.update({
@@ -86,7 +86,7 @@ export const IdentifyService = async (
       }
     }
 
-    // 6️⃣ Check if incoming data introduces new information
+    // Check if incoming data introduces new information
     const emailExists = email
       ? matchedContacts.some((c) => c.email === email)
       : true;
@@ -106,7 +106,7 @@ export const IdentifyService = async (
       });
     }
 
-    // 7️⃣ Fetch complete cluster (primary + all secondaries)
+    // Fetch complete cluster (primary + all secondaries)
     const fullCluster = await tx.contact.findMany({
       where: {
         OR: [
@@ -123,9 +123,6 @@ export const IdentifyService = async (
   });
 };
 
-// -----------------------------
-// Response Builder
-// -----------------------------
 const buildResponse = (contacts: Contact[]): IdentifyResponse => {
   const primary = contacts.find(
     (c) => c.linkPrecedence === "primary"
