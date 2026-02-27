@@ -50,12 +50,14 @@ npm run dev
 Server runs at - http://localhost:3000
 
 ##  API Endpoint
-Request Body
+cURL Request
 ```bash
-{
+postman request POST 'http://localhost:3000/identify' \
+  --header 'Content-Type: application/json' \
+  --body '{
   "email": "abc@test.com",
   "phoneNumber": "111"
-}
+}'
 ```
 Response Body
 ```bash
