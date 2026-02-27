@@ -53,19 +53,26 @@ Server runs at - http://localhost:3000
 Request Body
 ```bash
 {
-  "email": "test@example.com",
-  "phoneNumber": "123456"
+  "email": "abc@test.com",
+  "phoneNumber": "111"
 }
 ```
 Response Body
 ```bash
 {
-  "contact": {
-    "primaryContactId": 1,
-    "emails": ["test@example.com"],
-    "phoneNumbers": ["123456"],
-    "secondaryContactIds": [2, 3]
-  }
+    "contact": {
+        "primaryContactId": 1,
+        "email": [
+            "a@test.com",
+            "abc@test.com"
+        ],
+        "phoneNumber": [
+            "111"
+        ],
+        "secondaryContactIds": [
+            2
+        ]
+    }
 }
 ```
 
