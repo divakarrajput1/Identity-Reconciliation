@@ -10,7 +10,48 @@ This project implements an **Identity Reconciliation Service** using:
 
 The service identifies and links customer contacts based on email and phone number, maintaining a consistent primary–secondary relationship.
 
----
+## Live Deployment
+
+The backend service is hosted on Render:
+
+Base URL:
+https://identity-reconciliation-cct2.onrender.com
+
+### API Endpoint
+
+POST /identify
+
+Example:
+POST https://identity-reconciliation-cct2.onrender.com/identify
+
+Body:
+```bash
+{
+  "email": "abcd@test.com",
+  "phoneNumber": "123"
+}
+```
+
+Response:
+```bash
+{
+    "contact": {
+        "primaryContactId": 1,
+        "email": [
+            "live@test.com",
+            "abcd@test.com"
+        ],
+        "phoneNumber": [
+            "123456",
+            "123"
+        ],
+        "secondaryContactIds": [
+            2,
+            3
+        ]
+    }
+}
+```
 
 ##  Problem Statement
 
